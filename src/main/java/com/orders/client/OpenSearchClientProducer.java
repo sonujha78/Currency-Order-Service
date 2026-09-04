@@ -35,8 +35,11 @@ public class OpenSearchClientProducer {
         ApacheHttpClient5TransportBuilder builder = ApacheHttpClient5TransportBuilder.builder(
                 new HttpHost("http", host, port)
         );
-        builder.setHttpClientConfigCallback(httpClientBuilder ->
-                httpClientBuilder.setConnectionManager(connectionManager));
+        builder.setHttpClientConfigCallback(httpClientBuilder -> {
+            httpClientBuilder.setConnectionManager(connectionManager);
+            httpClientBuilder.disableContentCompression();
+            return httpClientBuilder;
+        });
 
         builder.setMapper(new JacksonJsonpMapper(objectMapper));
 

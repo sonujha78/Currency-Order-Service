@@ -1,5 +1,16 @@
-*
-!target/*-runner
-!target/*-runner.jar
-!target/lib/*
-!target/quarkus-app/*
+# Ignore build output and IDE files - source will be built fresh inside the Docker multi-stage build
+target/
+*.class
+.idea/
+*.iml
+*.iws
+.vscode/
+.git/
+.gitignore
+*.md
+docs/
+opensearch-dashboards/
+docker-compose.yml
+Dockerfile
+src/main/docker/
+.env

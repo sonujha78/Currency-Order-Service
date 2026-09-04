@@ -73,7 +73,7 @@ services:
   currency-order-service:
     build:
       context: .
-      dockerfile: src/main/docker/Dockerfile.jvm
+      dockerfile: Dockerfile
     container_name: currency-order-service
     ports:
       - "8080:8080"
@@ -81,9 +81,10 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/orders_db
       QUARKUS_DATASOURCE_USERNAME: orders_user
       QUARKUS_DATASOURCE_PASSWORD: orders_pass
-      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       OPENSEARCH_HOST: opensearch
       OPENSEARCH_PORT: 9200
+      JAVA_OPTS_APPEND: "-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Djava.net.preferIPv4Stack=true"
     depends_on:
       postgres:
         condition: service_healthy
